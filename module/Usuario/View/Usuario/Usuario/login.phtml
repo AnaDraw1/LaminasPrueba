@@ -1,0 +1,45 @@
+<?php
+// module/Usuario/view/Usuario/Usuario/edit.phtml:
+
+$title = 'Edit Usuario';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$Usuario = $form->get('User');
+$Usuario->setAttribute('class', 'form-control');
+$Usuario->setAttribute('placeholder', 'Usuario title');
+
+$Email = $form->get('Email');
+$Email->setAttribute('class', 'form-control');
+$Email->setAttribute('placeholder', 'Email');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('Usuario', [
+    'action' => 'edit',
+    'id'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($Usuario) ?>
+    <?= $this->formElement($Usuario) ?>
+    <?= $this->formElementErrors()->render($Usuario, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($Email) ?>
+    <?= $this->formElement($Email) ?>
+    <?= $this->formElementErrors()->render($Email, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+
+?>

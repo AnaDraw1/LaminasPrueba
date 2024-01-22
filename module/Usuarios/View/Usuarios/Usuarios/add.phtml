@@ -1,0 +1,56 @@
+<?php
+$title = 'Add new Usuarios';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+$Usuario = $form->get('Usuario');
+$Usuario->setAttribute('class', 'form-control');
+$Usuario->setAttribute('placeholder', 'Usuarios ');
+
+// This provides a default CSS class and placeholder text for the Email element:
+$Email = $form->get('Email');
+$Email->setAttribute('class', 'form-control');
+$Email->setAttribute('placeholder', 'Email');
+
+// This provides a default CSS class and placeholder text for the Email element:
+    $Contra = $form->get('Contra');
+    $Contra->setAttribute('class', 'form-control');
+    $Contra->setAttribute('placeholder', 'Contra');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('Usuarios', ['action' => 'add']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+    <?= $this->formLabel($Usuario) ?>
+    <?= $this->formElement($Usuario) ?>
+    <?= $this->formElementErrors()->render($Usuario, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($Email) ?>
+    <?= $this->formElement($Email) ?>
+    <?= $this->formElementErrors()->render($Email, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($Contra) ?>
+    <?= $this->formElement($Contra) ?>
+    <?= $this->formElementErrors()->render($Contra, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+
+?>

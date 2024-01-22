@@ -1,0 +1,55 @@
+<?php
+// module/Usuarios/view/Usuarios/Usuarios/edit.phtml:
+
+$title = 'Edit Usuarios';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$Usuarios = $form->get('Usuario');
+$Usuarios->setAttribute('class', 'form-control');
+$Usuarios->setAttribute('placeholder', 'Usuarios title');
+
+$Email = $form->get('Email');
+$Email->setAttribute('class', 'form-control');
+$Email->setAttribute('placeholder', 'Email');
+
+$Contra = $form->get('Contra');
+$Contra->setAttribute('class', 'form-control disabled');
+$Contra->setAttribute('placeholder', 'Contra');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('Usuarios', [
+    'action' => 'edit',
+    'id'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($Usuarios) ?>
+    <?= $this->formElement($Usuarios) ?>
+    <?= $this->formElementErrors()->render($Usuarios, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($Email) ?>
+    <?= $this->formElement($Email) ?>
+    <?= $this->formElementErrors()->render($Email, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($Contra) ?>
+    <?= $this->formElement($Contra) ?>
+    <?= $this->formElementErrors()->render($Contra, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+
+?>
